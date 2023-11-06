@@ -3,6 +3,8 @@ package com.vti.steel.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class Accessory {
             @JoinColumn(name= "license_plate",referencedColumnName = "license_plate"),
             @JoinColumn(name="repair_date",referencedColumnName = "repair_date")
     })
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Car car;
 
 }
