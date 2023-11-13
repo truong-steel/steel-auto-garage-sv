@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @Setter
 public class CarCreateForm {
 
-    @NotBlank(message="Biển số không được để trống.")
-    @Length(max = 255)
+    @NotBlank(message="{car.licensePlate.NotBlank.message}")
+    @Length(max = 255, message="{car.licensePlate.Length.message}")
     private String licensePlate;
 
     @NotNull
