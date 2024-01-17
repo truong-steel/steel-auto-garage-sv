@@ -11,5 +11,6 @@ public interface AccessoryService {
     Page<AccessoryDto> findAll(Pageable pageable);
     AccessoryDto update(Long id , AccessoryUpdateForm form);
 
+    AccessoryDto findById(Long id);
     void deleteById(Long id);
 }

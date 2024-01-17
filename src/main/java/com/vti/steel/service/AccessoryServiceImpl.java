@@ -45,6 +45,13 @@ public class AccessoryServiceImpl implements AccessoryService {
     }
 
     @Override
+    public AccessoryDto findById(Long id) {
+        return accessoryRepository.findById(id)
+                .map(comment -> modelMapper.map(comment, AccessoryDto.class))
+                .orElse(null);
+    }
+
+    @Override
     public void deleteById(Long id) {
         accessoryRepository.deleteById(id);
     }

@@ -31,6 +31,10 @@ public class AccessoryController {
     public AccessoryDto update(@PathVariable("id") Long id ,@RequestBody @Valid AccessoryUpdateForm form){
         return accessoryService.update(id,form);
     }
+    @GetMapping("/api/v1/accessories/{id}")
+    public AccessoryDto findById(@PathVariable("id") Long id){
+        return accessoryService.findById(id);
+    }
     @DeleteMapping("/api/v1/accessories/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable("id") Long id){

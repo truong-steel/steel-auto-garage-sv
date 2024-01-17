@@ -3,6 +3,7 @@ package com.vti.steel.controller;
 import com.vti.steel.dto.CarDto;
 import com.vti.steel.entity.Car;
 import com.vti.steel.form.CarCreateForm;
+import com.vti.steel.form.CarFilterForm;
 import com.vti.steel.form.CarUpdateForm;
 import com.vti.steel.service.CarService;
 import jakarta.validation.Valid;
@@ -26,8 +27,8 @@ public class CarController {
     }
 
 @GetMapping("/api/v1/cars")
-    public Page<CarDto> findAll(Pageable pageable){
-    return carService.findAll(pageable);
+    public Page<CarDto> findAll(CarFilterForm form, Pageable pageable){
+    return carService.findAll(form ,pageable);
 }
 
 @PutMapping("/api/v1/cars")
@@ -39,4 +40,9 @@ public class CarController {
     public void deleteById(@RequestBody Car.PrimaryKey pk){
     carService.deleteById(pk);
 }
+
+@GetMapping("/api/v1/cars/{id}")
+    public CarDto findById(@PathVariable Car.PrimaryKey pk){
+    return carService.findById(pk);
+    }
 }
