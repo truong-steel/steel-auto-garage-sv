@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface CarService {
     Page<CarDto> findAll(CarFilterForm form , Pageable pageable);
+    CarDto findById(Long id);
     CarDto create(CarCreateForm form);
-    CarDto update(CarUpdateForm form);
-    CarDto findById(Car.PrimaryKey pk);
-    void deleteById(Car.PrimaryKey pk);
+    CarDto update(Long id,CarUpdateForm form);
+    void deleteById(Long id);
 }

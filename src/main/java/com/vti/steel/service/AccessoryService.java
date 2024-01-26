@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface AccessoryService {
-    AccessoryDto create(AccessoryCreateForm form);
+    AccessoryDto create(Long carId ,AccessoryCreateForm form);
     Page<AccessoryDto> findAll(Pageable pageable);
     AccessoryDto update(Long id , AccessoryUpdateForm form);
 

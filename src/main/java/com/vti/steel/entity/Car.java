@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,8 +14,15 @@ import java.util.List;
 @Entity
 @Table(name="car")
 public class Car {
-    @EmbeddedId
-    private PrimaryKey pk;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name="license_plate", unique = true)
+    private String licensePlate;
+
+    @Column(name="repair_date", nullable = false)
+    private LocalDate repairDate;
 
     @Column(name="customer_name", nullable = false)
     private String customerName;
@@ -27,15 +35,5 @@ public class Car {
 
     @OneToMany(mappedBy = "car")
     private List<Accessory> accessories;
-@Getter
-@Setter
-@EqualsAndHashCode
-@Embeddable
-    public static class PrimaryKey {
-    @Column(name="license_plate")
-        private String licensePlate;
-    @Column(name="repair_date")
-        private LocalDate repairDate;
 
-    }
 }

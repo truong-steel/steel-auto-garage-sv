@@ -31,11 +31,8 @@ public class Accessory {
     private String repairStatus;
 
     @ManyToOne
-    @JoinColumns(value= {
-            @JoinColumn(name= "license_plate",referencedColumnName = "license_plate"),
-            @JoinColumn(name="repair_date",referencedColumnName = "repair_date")
-    })
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name="car_id",nullable = false)
+
     private Car car;
 
 }

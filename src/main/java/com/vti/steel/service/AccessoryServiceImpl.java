@@ -19,10 +19,9 @@ public class AccessoryServiceImpl implements AccessoryService {
     private final CarRepository carRepository;
     private final ModelMapper modelMapper;
     @Override
-    public AccessoryDto create(AccessoryCreateForm form) {
+    public AccessoryDto create(Long id ,AccessoryCreateForm form) {
         var accessory = modelMapper.map(form , Accessory.class);
-        var pk = modelMapper.map(form , Car.PrimaryKey.class);
-        var car = carRepository.findById(pk).get();
+        var car = carRepository.findById(id).get();
         accessory.setCar(car);
         var savedAccessory = accessoryRepository.save(accessory);
 

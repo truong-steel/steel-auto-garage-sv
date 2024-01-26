@@ -31,18 +31,20 @@ public class CarController {
     return carService.findAll(form ,pageable);
 }
 
-@PutMapping("/api/v1/cars")
-    public CarDto update(@RequestBody @Valid CarUpdateForm form){
-    return carService.update(form);
-}
-
-@DeleteMapping("/api/v1/cars")
-    public void deleteById(@RequestBody Car.PrimaryKey pk){
-    carService.deleteById(pk);
-}
-
 @GetMapping("/api/v1/cars/{id}")
-    public CarDto findById(@PathVariable Car.PrimaryKey pk){
-    return carService.findById(pk);
-    }
+    public CarDto findById(@PathVariable("id") Long id) {
+    return carService.findById(id);
+}
+
+@PutMapping("/api/v1/cars/{id}")
+    public CarDto update(@PathVariable("id") Long id ,@Valid @RequestBody CarUpdateForm form){
+    return carService.update(id,form);
+}
+
+@DeleteMapping("/api/v1/cars/{id}")
+    public void deleteById(@PathVariable("id") Long id){
+    carService.deleteById(id);
+}
+
+
 }

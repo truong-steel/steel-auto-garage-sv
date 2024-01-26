@@ -27,33 +27,29 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
+    public CarDto findById(Long id) {
+        return carRepository.findById(id).map(car -> modelMapper.map(car , CarDto.class)).orElse(null);
+    }
+
+    @Override
     public CarDto create(CarCreateForm form) {
         var car = modelMapper.map(form, Car.class);
-        var pk = modelMapper.map(form ,Car.PrimaryKey.class); //map 2 thuộc tính thuộc primary key
-        car.setPk(pk);
+        var savedCar = carRepository.save(car);
+        return modelMapper.map(savedCar, CarDto.class);
+    }
+
+    @Override
+    public CarDto update(Long id ,CarUpdateForm form) {
+
+        var car = carRepository.findById(id).get();
+        modelMapper.map(form , car);
 
         var savedCar = carRepository.save(car);
         return modelMapper.map(savedCar, CarDto.class);
     }
 
     @Override
-    public CarDto update(CarUpdateForm form) {
-        var pk = modelMapper.map(form , Car.PrimaryKey.class);
-        var car = carRepository.findById(pk).get();
-        modelMapper.map(form,car);
-        var savedCar = carRepository.save(car);
-        return modelMapper.map(savedCar, CarDto.class);
-    }
-
-    @Override
-    public CarDto findById(Car.PrimaryKey pk) {
-        return carRepository.findById(pk)
-                .map(post -> modelMapper.map(post, CarDto.class).withSelfRel())
-                .orElse(null);
-    }
-
-    @Override
-    public void deleteById(Car.PrimaryKey pk) {
-        carRepository.deleteById(pk);
+    public void deleteById(Long id) {
+        carRepository.deleteById(id);
     }
 }

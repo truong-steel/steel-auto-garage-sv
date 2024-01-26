@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class AccessoryController {
     private final AccessoryService accessoryService;
-    @PostMapping("/api/v1/accessories")
+    @PostMapping("/api/v1/{carId}/accessories")
     @ResponseStatus(HttpStatus.CREATED)
-    public AccessoryDto create(@RequestBody @Valid AccessoryCreateForm form){
-        return accessoryService.create(form);
+    public AccessoryDto create(@PathVariable("carId") Long carId , @RequestBody @Valid AccessoryCreateForm form){
+        return accessoryService.create(carId,form);
     }
     @GetMapping("/api/v1/accessories")
     public Page<AccessoryDto> findAll(Pageable pageable){

@@ -18,29 +18,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 public class CarDto extends RepresentationModel<CarDto> {
     //mapping các thuộc tính từ Car.Entity qua Car.Dto
-    @JsonProperty("licensePlate") // trả về tên biến hiển thị trên postman
-    private Car.PrimaryKey pkLicensePlate;
-    @JsonProperty("repairDate")
-    private LocalDate pkRepairDate;
+    private Long id;
+    private String licensePlate;
+    private LocalDate repairDate;
     private String customerName;
     private String catalog;
     private String carMaker;
     private List<AccessoryDto> accessories;
-
-    public CarDto withSelfRel() {
-        if (accessories != null){
-            for (AccessoryDto accessory : accessories) {
-                accessory.withSelfRel();
-            }
-        }
-
-        var controller = methodOn(CarController.class);
-
-        var dto = controller.findById(pkLicensePlate);
-
-        var link = linkTo(dto).withSelfRel();
-
-        return add(link);
-
-    }
 }
+

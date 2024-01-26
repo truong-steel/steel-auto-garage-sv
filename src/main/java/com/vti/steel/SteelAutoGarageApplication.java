@@ -31,13 +31,13 @@ public class SteelAutoGarageApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		var admin = roleRepository.findByType(Role.Type.ADMIN);
-		var user = roleRepository.findByType(Role.Type.USER);
+
 		var account = new User();
 		account.setName("Trường");
 		account.setUsername("truong");
 		account.setEmail("truong@gmail.com");
 		account.setPassword(passwordEncoder.encode("123456"));
-		account.setRoles(Set.of(admin,user));
+		account.setRoles(Set.of(admin));
 		userRepository.save(account);
 
 	}
